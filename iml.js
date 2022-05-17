@@ -23,9 +23,14 @@ export class IML {
         // Iterate over the fonts commands
     }
 
-    addFont(font) {} // TODO
-    addFgColor(color) {} // TODO
-    addBgColor(color) {} // TODO
+    addFont(name, points) {
+        let pixels = points * (4/3);
+        let font = pixels.toString() + "px " + name;
+        this.fontPool.push(font);
+    }
+
+    addFgColor(color) {}
+    addBgColor(color) {}
 
     insertText(text, start) {
         // Insert text
@@ -36,6 +41,10 @@ export class IML {
 
         this.fontMap.splice(start, 0, ...Array(text.length).fill(this.fontMap[start - 1]));
         this.boldMap.splice(start, 0, ...Array(text.length).fill(this.boldMap[start - 1]));
+        this.italicMap.splice(start, 0, ...Array(text.length).fill(this.italicMap[start - 1]));
+        this.underlineMap.splice(start, 0, ...Array(text.length).fill(this.underlineMap[start - 1]));
+        this.fgColorMap.splice(start, 0, ...Array(text.length).fill(this.fgColorMap[start - 1]));
+        this.bgColorMap.splice(start, 0, ...Array(text.length).fill(this.bgColorMap[start - 1]));
     }
 
     deleteText(start, lenght) { 
